@@ -1,13 +1,4 @@
-parameters:
-- name: preTasks
-  type: object
-  default: []
-- name: postTasks
-  type: object
-  default: []
-- name: testWorkingDirectory
-  type: string
-  default: ''
+
 
 jobs:
 - job: test_logic_app
@@ -16,8 +7,6 @@ jobs:
     vmImage: 'ubuntu-latest'
   steps:
     
-  - ${{ parameters.preTasks }}
-
 
   - task: NodeTool@0 
     inputs:
@@ -43,5 +32,3 @@ jobs:
       script: |
               cd basic-workflow
               func start --verbose
-
-  - ${{ parameters.postTasks }}
