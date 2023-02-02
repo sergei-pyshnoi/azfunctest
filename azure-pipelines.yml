@@ -1,0 +1,52 @@
+parameters:
+- name: preTasks
+  type: object
+  default: []
+- name: postTasks
+  type: object
+  default: []
+- name: testWorkingDirectory
+  type: string
+  default: ''
+
+jobs:
+- job: test_logic_app
+  displayName: Test logic app workflow
+  pool:
+    vmImage: 'ubuntu-latest'
+  steps:
+    
+  - ${{ parameters.preTasks }}
+
+  - task: DotNetCoreCLI@2
+    inputs:      
+      command: 'restore'
+      projects: '**/*.csproj'     
+    displayName: 'dotnet restore' 
+
+  - task: NodeTool@0 
+    inputs:
+        versionSpec: 14.x
+  - bash: |
+          sudo npm install -g azurite@3.20.1
+          sudo azurite -v
+          sudo mkdir azurite
+          sudo azurite --silent --location azurite --debug azurite\debug.log &
+    displayName: 'Install and Run Azurite'
+
+  - task: PowerShell@2
+    displayName: 'Install Azure Function Core Tools'
+    inputs:
+      targetType: 'inline'
+      script: |
+              sudo npm i -g azure-functions-core-tools@4 --unsafe-perm true
+
+  - task: PowerShell@2
+    displayName: 'Run Azure Function Core Tools'
+    inputs:
+      targetType: 'inline'
+      script: |
+              cd basic-workflow
+              func start --verbose
+
+  - ${{ parameters.postTasks }}
