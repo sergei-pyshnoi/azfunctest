@@ -31,5 +31,5 @@ jobs:
     inputs:
       targetType: 'inline'
       script: |
-              Install-Package PInvoke.AdvApi32
+              Install-Package PInvoke
               func start --verbose
