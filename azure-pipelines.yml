@@ -4,7 +4,7 @@ jobs:
 - job: test_logic_app
   displayName: Test logic app workflow
   pool:
-    vmImage: 'ubuntu-latest'
+    vmImage: 'windows-latest'
   steps:
     
 
