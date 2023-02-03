@@ -30,5 +30,4 @@ jobs:
     inputs:
       targetType: 'inline'
       script: |
-              cd basic-workflow
               func start --verbose
