@@ -4,7 +4,7 @@ jobs:
 - job: test_logic_app
   displayName: Test logic app workflow
   pool:
-    vmImage: 'windows-latest'
+    vmImage: 'ubuntu-latest'
   steps:
     
 
@@ -23,7 +23,8 @@ jobs:
     inputs:
       targetType: 'inline'
       script: |
-              sudo npm i -g azure-functions-core-tools@4 --unsafe-perm true
+              sudo apt-get install azure-functions-core-tools-4 -y
+#              sudo npm i -g azure-functions-core-tools@4 --unsafe-perm true
 
   - task: PowerShell@2
     displayName: 'Run Azure Function Core Tools'
