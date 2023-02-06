@@ -23,14 +23,10 @@ jobs:
     inputs:
       targetType: 'inline'
       script: |
-              sudo apt-get install azure-functions-core-tools-4 -y
-#              sudo npm i -g azure-functions-core-tools@4 --unsafe-perm true
-
+              sudo npm i -g azure-functions-core-tools@4 --unsafe-perm true
   - task: PowerShell@2
     displayName: 'Run Azure Function Core Tools'
     inputs:
       targetType: 'inline'
       script: |
-              Install-Package PInvoke -force
-              Install-Package PInvoke.AdvApi32 -force
               func start --verbose
