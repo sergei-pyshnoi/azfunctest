@@ -4,9 +4,14 @@ jobs:
 - job: test_logic_app
   displayName: Test logic app workflow
   pool:
-    vmImage: 'ubuntu-18.04'
+    vmImage: 'ubuntu-latest'
+
   steps:
     
+  - task: Bash@3
+    inputs:
+      targetType: 'inline'
+      script: 'nbgv --version'
 
   - task: NodeTool@0 
     inputs:
